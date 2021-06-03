@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-console.log('welcome package-first-cli!')
+console.log('welcome package_first_cli!')
