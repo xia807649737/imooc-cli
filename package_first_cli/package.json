@@ -13,6 +13,6 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "package_first_lib":"^1.0.0"
+        "package_first_lib": "^1.0.0"
     }
 }
