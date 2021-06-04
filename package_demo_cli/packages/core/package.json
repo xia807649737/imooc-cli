@@ -25,5 +25,6 @@
   },
   "dependencies": {
     "@package_demo_cli/utils": "^1.0.2"
-  }
+  },
+  "gitHead": "be4ffa79ffe851fc6e3c5721c46d008e101209e4"
 }
