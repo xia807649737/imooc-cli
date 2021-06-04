@@ -18,13 +18,12 @@
     "url": "git+https://github.com/xia807649737/imooc-cli.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Run testing from core\""
   },
   "bugs": {
     "url": "https://github.com/xia807649737/imooc-cli/issues"
   },
   "dependencies": {
-    "@package_demo_cli/utils": "^1.0.0",
-    "imooc-cli": "^3.0.0"
+    "@package_demo_cli/utils": "^1.0.0"
   }
 }
