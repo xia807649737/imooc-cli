@@ -22,5 +22,8 @@
   },
   "bugs": {
     "url": "https://github.com/xia807649737/imooc-cli/issues"
+  },
+  "dependencies": {
+    "imooc-cli": "^3.0.0"
   }
 }
