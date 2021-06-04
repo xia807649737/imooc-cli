@@ -1,6 +1,6 @@
 {
   "name": "@package_demo_cli/core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "package_demo_cli core",
   "author": "xiahong <807649737@qq.com>",
   "homepage": "https://github.com/xia807649737/imooc-cli#readme",
@@ -24,6 +24,6 @@
     "url": "https://github.com/xia807649737/imooc-cli/issues"
   },
   "dependencies": {
-    "@package_demo_cli/utils": "^1.0.1"
+    "@package_demo_cli/utils": "^1.0.2"
   }
 }
