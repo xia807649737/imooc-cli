@@ -1,18 +1,19 @@
 {
-    "name": "package_first_cli",
-    "version": "1.0.1",
-    "description": "",
-    "bin": {
-        "package_first_cli": "bin/index.js"
-    },
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "package_first_lib": "^1.0.0"
-    }
+  "name": "package_first_cli",
+  "version": "1.0.1",
+  "description": "",
+  "bin": {
+    "package_first_cli": "bin/index.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "package_first_lib": "^1.0.0",
+    "yargs": "^17.0.1"
+  }
 }
