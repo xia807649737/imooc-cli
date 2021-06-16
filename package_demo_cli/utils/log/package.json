@@ -1,14 +1,14 @@
 {
-  "name": "@package_demo_cli/core",
+  "name": "@package_demo_cli/log",
   "version": "1.0.5",
-  "description": "package_demo_cli core",
+  "description": "package_demo_cli log",
+  "keywords": [
+    "log"
+  ],
   "author": "xiahong <807649737@qq.com>",
   "homepage": "https://github.com/xia807649737/imooc-cli#readme",
   "license": "ISC",
   "main": "lib/index.js",
-  "bin": {
-    "package_demo_cli": "bin/index.js"
-  },
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -16,24 +16,20 @@
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xia807649737/imooc-cli.git"
   },
   "scripts": {
-    "test": "echo \"Run testing from core\""
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/xia807649737/imooc-cli/issues"
   },
   "dependencies": {
-    "@package_demo_cli/utils": "^1.0.5",
-    "@package_demo_cli/log": "file:../../../../utils/log",
-    "import-local": "^3.0.2",
     "npmlog": "^4.1.2"
-  },
-  "gitHead": "bab90349b11aa07557f4c6369a1812bc743a2ddc",
-  "publishConfig": {
-    "access": "public"
   }
 }
