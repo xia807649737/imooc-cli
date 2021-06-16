@@ -1,9 +1,17 @@
 'use strict';
 
-module.exports = index;
+//log定制
+const log = require('npmlog');
+// 判断debug模式
+log.level = process.env.LOG_LEVEL ? process.env.LOG_LEVEL : 'info';
 
-const log =require('npmlog');
+//修改前缀
+log.heading = 'imooc';
+log.headingStyle = { fg: 'blue' };
 
-function index() {
-    log.info('core','这是一个test')
-}
+log.addLevel('a', 2000, { fg: 'green' });
+
+//添加自定义模式
+log.addLevel('success', 2000, { fg: 'red', bold: true }); 
+
+module.exports = log;

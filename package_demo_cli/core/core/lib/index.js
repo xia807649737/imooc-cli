@@ -12,6 +12,10 @@ function core() {
 }
 
 function checkPkgVersion() {
-    console.log(pkg.version);
-    log();
+    // console.log(pkg.version);
+    // log.a('test','go');
+    log.success('haha','success...');
+    log.verbose('debug','debug...');
+    log.notice('core',pkg.version)
+    log.info('core',pkg.name)
 }
