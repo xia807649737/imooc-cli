@@ -7,7 +7,7 @@
 const importLocal = require('import-local');
 
 if(importLocal(__filename)){
-    require('npmlog').info('core','正在使用 package_demo_cli 本地版本')
+    require('npmlog').info('core','正在使用 package_demo_cli 本地版本');
 } else {
-    require('../lib')(process.argv.slice(2))
+    require('../lib')(process.argv.slice(2));
 }

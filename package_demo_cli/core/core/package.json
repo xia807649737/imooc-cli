@@ -28,8 +28,11 @@
   },
   "dependencies": {
     "@package_demo_cli/utils": "^1.0.5",
+    "@package_demo_cli/log": "../../utils/log",
+    "colors": "^1.4.0",
     "import-local": "^3.0.2",
-    "npmlog": "^4.1.2"
+    "npmlog": "^4.1.2",
+    "semver": "^7.3.5"
   },
   "gitHead": "bab90349b11aa07557f4c6369a1812bc743a2ddc",
   "publishConfig": {

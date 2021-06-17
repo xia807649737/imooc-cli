@@ -9,7 +9,7 @@ log.level = process.env.LOG_LEVEL ? process.env.LOG_LEVEL : 'info';
 log.heading = 'imooc';
 log.headingStyle = { fg: 'blue' };
 
-log.addLevel('a', 2000, { fg: 'green' });
+log.addLevel('say', 2000, { fg: 'green' });
 
 //添加自定义模式
 log.addLevel('success', 2000, { fg: 'red', bold: true }); 
