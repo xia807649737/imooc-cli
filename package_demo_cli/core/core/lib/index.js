@@ -102,4 +102,4 @@ function checkEnv() {
       cliConfig['cliHome'] = path.join(userHome, constant.DEFAULT_CLI_HOME);
     }
     return cliConfig;
-  }
+ee
