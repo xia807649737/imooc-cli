@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = core;
+const path = require('path');
 //外部依赖在前面
 const semver = require('semver');
 const colors = require('colors/safe');
@@ -15,7 +16,8 @@ const userHome = require('user-home');
 const pathExists = require('path-exists').sync;
 
 //debug模式启动
-let args = null;
+let args;
+let config;
 
 function core() {
     try {
@@ -23,6 +25,7 @@ function core() {
         checkNodeVersion();
         checkUserHome();
         checkInputArgs();
+        checkEnv();
         // checkRoot();
     } catch (e) {
         log.error(e.message);
@@ -78,3 +81,25 @@ function checkArgs() {
     }
     log.level = process.env.LOG_LEVEL;
 }
+
+function checkEnv() {
+    log.verbose('开始检查环境变量');
+    let dotenv = require('dotenv');
+    dotenv.config({
+      path: path.resolve(userHome, '.env'),
+    });
+    config = createCliConfig(); // 准备基础配置
+    log.verbose('环境变量', config);
+  }
+  
+  function createCliConfig() {
+    let cliConfig = {
+      home: userHome,
+    };
+    if (process.env.CLI_HOME) {
+      cliConfig['cliHome'] = path.join(userHome, process.env.CLI_HOME);
+    } else {
+      cliConfig['cliHome'] = path.join(userHome, constant.DEFAULT_CLI_HOME);
+    }
+    return cliConfig;
+  }
