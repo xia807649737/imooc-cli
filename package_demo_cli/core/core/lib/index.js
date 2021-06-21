@@ -23,7 +23,6 @@ function core() {
         checkNodeVersion();
         checkUserHome();
         checkInputArgs();
-        log.verbose('debug', 'test debug log');
         // checkRoot();
     } catch (e) {
         log.error(e.message);
@@ -68,6 +67,7 @@ function checkInputArgs() {
     args = minimist(process.argv.slice(2));
     // console.log(args);
     checkArgs()
+    // log.verbose('debug', 'test debug log');
 }
 
 function checkArgs() {
