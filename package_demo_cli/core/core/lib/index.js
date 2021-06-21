@@ -8,7 +8,7 @@ const colors = require('colors/safe');
 // require支持.js .json ,其他有js代码的文件
 const pkg = require('../package.json');
 const log = require('@package_demo_cli/log');
-const lowVersion = require('./version');
+const constant = require('./common');
 
 //用户主目录
 const userHome = require('user-home');
@@ -43,7 +43,7 @@ function checkNodeVersion() {
     const currentVersion = process.version;
     // console.log(currentVersion);
     // 第二步,对比最低版本号(设置12.0.0)
-    const lowestVersion = lowVersion.LOWEST_NODE_VERSION;
+    const lowestVersion = constant.LOWEST_NODE_VERSION;
     // console.log(lowestVersion);
     if (!semver.gte(currentVersion, lowestVersion)) {
         throw new Error(colors.red(`package_demo_cli 需要安装 v${lowestVersion} 及以上版本的 Node.js`));
