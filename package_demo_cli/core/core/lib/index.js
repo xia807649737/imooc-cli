@@ -11,13 +11,19 @@ const log = require('@package_demo_cli/log');
 const lowVersion = require('./version');
 
 //用户主目录
-const userHome = require('user-home'); 
+const userHome = require('user-home');
 const pathExists = require('path-exists').sync;
+
+//debug模式启动
+let args = null;
+
 function core() {
     try {
         checkPkgVersion();
         checkNodeVersion();
         checkUserHome();
+        checkInputArgs();
+        log.verbose('debug', 'test debug log');
         // checkRoot();
     } catch (e) {
         log.error(e.message);
@@ -28,8 +34,8 @@ function checkPkgVersion() {
     // log.say('test', 'go');
     // log.success('haha', 'success...');
     // log.verbose('debug', 'debug...');
-    // log.info('core', pkg.name);
-    log.notice('core', pkg.version);
+    // log.notice('core', pkg.name);
+    log.info('core', pkg.version);
 }
 
 function checkNodeVersion() {
@@ -50,9 +56,25 @@ function checkRoot() {
     // console.log(process.geteuid());
 }
 
-function checkUserHome(){
+function checkUserHome() {
     // console.log(userHome);
-    if(!userHome || !pathExists(userHome)){
+    if (!userHome || !pathExists(userHome)) {
         throw new Error(colors.red('当前用户住主目录不存在!'));
     }
+}
+
+function checkInputArgs() {
+    let minimist = require('minimist');
+    args = minimist(process.argv.slice(2));
+    // console.log(args);
+    checkArgs()
+}
+
+function checkArgs() {
+    if (args.debug) {
+        process.env.LOG_LEVEL = 'verbose';
+    } else {
+        process.env.LOG_LEVEL = 'info';
+    }
+    log.level = process.env.LOG_LEVEL;
 }
