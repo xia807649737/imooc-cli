@@ -11,21 +11,21 @@ const log = require('@package_demo_cli/log');
 const lowVersion = require('./version');
 
 function core() {
-    console.log('以下不执行,打印看看')
     try {
-        // checkPkgVersion();
+        checkPkgVersion();
         // checkNodeVersion();
+        // checkRoot();
     } catch (e) {
         log.error(e.message);
     }
 }
 
 function checkPkgVersion() {
-    log.say('test', 'go');
-    log.success('haha', 'success...');
-    log.verbose('debug', 'debug...');
+    // log.say('test', 'go');
+    // log.success('haha', 'success...');
+    // log.verbose('debug', 'debug...');
+    // log.info('core', pkg.name);
     log.notice('core', pkg.version);
-    log.info('core', pkg.name);
 }
 
 function checkNodeVersion() {
@@ -36,4 +36,10 @@ function checkNodeVersion() {
     if (!semver.gte(currentVersion, lowestVersion)) {
         throw new Error(colors.red(`package_demo_cli 需要安装 v${lowestVersion} 及以上版本的 Node.js`));
     }
+}
+
+function checkRoot() {
+    let rootCheck = require('root-check');
+    rootCheck();
+    console.log(process.geteuid());
 }
