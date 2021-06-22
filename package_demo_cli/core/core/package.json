@@ -27,7 +27,7 @@
     "url": "https://github.com/xia807649737/imooc-cli/issues"
   },
   "dependencies": {
-    "@package_demo_cli/log": "../../utils/log",
+    "@package_demo_cli/log": "file:../../utils/log",
     "@package_demo_cli/utils": "^1.0.5",
     "colors": "^1.4.0",
     "dotenv": "^10.0.0",

@@ -54,7 +54,8 @@ function checkNodeVersion() {
 
 function checkRoot() {
     let rootCheck = require('root-check');
-    rootCheck(colors.red('请避免使用 root 账户启动本应用'));
+    // rootCheck(colors.red('请避免使用 root 账户启动本应用'));
+    console.log(process.geteuid());
 }
 
 function checkUserHome() {
