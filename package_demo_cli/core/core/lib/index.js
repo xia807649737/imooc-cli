@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = core;
+
 const path = require('path');
 //外部依赖在前面
 const semver = require('semver');
@@ -23,7 +24,7 @@ function core() {
     try {
         checkPkgVersion();
         checkNodeVersion();
-        checkRoot();
+        // checkRoot();
         checkUserHome();
         checkInputArgs();
         checkEnv();
@@ -54,8 +55,8 @@ function checkNodeVersion() {
 
 function checkRoot() {
     let rootCheck = require('root-check');
-    // rootCheck(colors.red('请避免使用 root 账户启动本应用'));
-    console.log(process.geteuid());
+    rootCheck(colors.red('请避免使用 root 账户启动本应用'));
+    // console.log(process.geteuid);
 }
 
 function checkUserHome() {
