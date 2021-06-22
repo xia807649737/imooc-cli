@@ -114,9 +114,12 @@ async function checkGlobalUpdate() {
     const currentVersion = pkg.version;
     const npmName = pkg.name;
     // 2.调用npm API,获取所有版本号
-    const { getNpmVersions } = require('@package_demo_cli/get-npm-info');
-    const versions = await getNpmVersions(npmName);
-    console.log(versions);
+    const { getNmpSemverVersion } = require('@package_demo_cli/get-npm-info');
+    const lastVersion = await getNmpSemverVersion(currentVersion, npmName);
     // 3.提取所有版本号,对比哪些版本号是大于当前版本号
-    // 4.获取最新版号,提示用户更新到该版本号
+    if (lastVersion && semver.gt(lastVersion, currentVersion)) {
+        // 4.获取最新版号,提示用户更新到该版本号
+        log.warn(colors.yellow(`请手动更新${npmName},当前版本:${currentVersion},最新版本:${lastVersion}
+        更新命令: npm install -g ${npmName}`));
+    }
 }
