@@ -88,8 +88,10 @@ function checkEnv() {
     dotenv.config({
         path: path.resolve(userHome, '.env'),
     });
-    config = createCliConfig(); // 准备基础配置
-    log.verbose('环境变量', config);
+    // config = createCliConfig(); // 准备基础配置
+    // log.verbose('环境变量', config);
+    createCliConfig(); // 准备基础配置
+    log.verbose('环境变量', process.env.CLI_HOME_PATH);
 }
 
 function createCliConfig() {
@@ -101,5 +103,6 @@ function createCliConfig() {
     } else {
         cliConfig['cliHome'] = path.join(userHome, constant.DEFAULT_CLI_HOME);
     }
-    return cliConfig;
+    process.env.CLI_HOME_PATH = cliConfig.cliHome;
+    // return cliConfig;
 }
