@@ -23,10 +23,10 @@ function core() {
     try {
         checkPkgVersion();
         checkNodeVersion();
+        checkRoot();
         checkUserHome();
         checkInputArgs();
         checkEnv();
-        // checkRoot();
     } catch (e) {
         log.error(e.message);
     }
@@ -53,9 +53,8 @@ function checkNodeVersion() {
 }
 
 function checkRoot() {
-    let rootCheck = require('root-check');
-    rootCheck();
-    // console.log(process.geteuid());
+    const rootCheck = require('root-check');
+    rootCheck(colors.red('请避免使用 root 账户启动本应用'));
 }
 
 function checkUserHome() {
@@ -83,7 +82,7 @@ function checkArgs() {
 }
 
 function checkEnv() {
-    log.verbose('开始检查环境变量');
+    // log.verbose('开始检查环境变量');
     let dotenv = require('dotenv');
     dotenv.config({
         path: path.resolve(userHome, '.env'),
