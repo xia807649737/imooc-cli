@@ -27,7 +27,7 @@ function getDefaultRegitry(isOriginal = false) {
 async function getNpmVersions(npmName, registry) {
     // return getNpmInfo(npmName, registry);
     const data = await getNpmInfo(npmName, registry);
-    if(data) {
+    if (data) {
         return Object.keys(data.versions);
     } else {
         return [];
