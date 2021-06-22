@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@package_demo_cli/log": "file:../../utils/log",
+    "@package_demo_cli/get-npm-info": "../../utils/get-npm-info",
     "@package_demo_cli/utils": "^1.0.5",
     "colors": "^1.4.0",
     "dotenv": "^10.0.0",
