@@ -86,20 +86,20 @@ function checkEnv() {
     log.verbose('开始检查环境变量');
     let dotenv = require('dotenv');
     dotenv.config({
-      path: path.resolve(userHome, '.env'),
+        path: path.resolve(userHome, '.env'),
     });
     config = createCliConfig(); // 准备基础配置
     log.verbose('环境变量', config);
-  }
-  
-  function createCliConfig() {
+}
+
+function createCliConfig() {
     let cliConfig = {
-      home: userHome,
+        home: userHome,
     };
     if (process.env.CLI_HOME) {
-      cliConfig['cliHome'] = path.join(userHome, process.env.CLI_HOME);
+        cliConfig['cliHome'] = path.join(userHome, process.env.CLI_HOME);
     } else {
-      cliConfig['cliHome'] = path.join(userHome, constant.DEFAULT_CLI_HOME);
+        cliConfig['cliHome'] = path.join(userHome, constant.DEFAULT_CLI_HOME);
     }
     return cliConfig;
-  }
+}
