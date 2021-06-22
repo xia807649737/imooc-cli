@@ -23,4 +23,15 @@ function getNpmInfo(npmName, registry) {
 function getDefaultRegitry(isOriginal = false) {
     return isOriginal ? 'http://registry.npmmjs.org' : 'http://registry.npm.taobao.org';
 }
-module.exports = { getNpmInfo };
+
+async function getNpmVersions(npmName, registry) {
+    // return getNpmInfo(npmName, registry);
+    const data = await getNpmInfo(npmName, registry);
+    if(data) {
+        return Object.keys(data.versions);
+    } else {
+        return [];
+    }
+}
+
+module.exports = { getNpmInfo, getNpmVersions };

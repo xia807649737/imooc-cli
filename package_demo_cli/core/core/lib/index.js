@@ -22,13 +22,13 @@ let args;
 
 async function core() {
     try {
-        checkPkgVersion();
-        checkNodeVersion();
-        // checkRoot();
-        checkUserHome();
-        checkInputArgs();
-        checkEnv();
-        checkGlobalUpdate();
+        checkPkgVersion();  // 检查当前运行版本
+        checkNodeVersion(); // 检查 node 版本
+        // checkRoot();     // 检查是否为 root 启动
+        checkUserHome();    // 检查用户主目录
+        checkInputArgs();   // 检查用户输入参数
+        checkEnv();         // 检查环境变量
+        await checkGlobalUpdate(); // 检查工具是否需要更新
     } catch (e) {
         log.error(e.message);
     }
@@ -114,9 +114,9 @@ async function checkGlobalUpdate() {
     const currentVersion = pkg.version;
     const npmName = pkg.name;
     // 2.调用npm API,获取所有版本号
-    const { getNpmInfo } = require('@package_demo_cli/get-npm-info');
-    const data = await getNpmInfo(npmName);
-    console.log(data);
+    const { getNpmVersions } = require('@package_demo_cli/get-npm-info');
+    const versions = await getNpmVersions(npmName);
+    console.log(versions);
     // 3.提取所有版本号,对比哪些版本号是大于当前版本号
     // 4.获取最新版号,提示用户更新到该版本号
 }
