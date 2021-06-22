@@ -21,7 +21,7 @@ let config;
 
 function core() {
     try {
-        checkPkgVersion();
+        // checkPkgVersion();
         checkNodeVersion();
         checkRoot();
         checkUserHome();
@@ -53,7 +53,7 @@ function checkNodeVersion() {
 }
 
 function checkRoot() {
-    const rootCheck = require('root-check');
+    let rootCheck = require('root-check');
     rootCheck(colors.red('请避免使用 root 账户启动本应用'));
 }
 
