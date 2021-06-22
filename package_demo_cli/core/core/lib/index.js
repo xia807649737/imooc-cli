@@ -18,9 +18,9 @@ const pathExists = require('path-exists').sync;
 
 //debug模式启动
 let args;
-let config;
+// let config;
 
-function core() {
+async function core() {
     try {
         checkPkgVersion();
         checkNodeVersion();
@@ -109,13 +109,14 @@ function createCliConfig() {
     // return cliConfig;
 }
 
-function checkGlobalUpdate() {
+async function checkGlobalUpdate() {
     // 1.获取当前版本号和模块名
     const currentVersion = pkg.version;
     const npmName = pkg.name;
     // 2.调用npm API,获取所有版本号
     const { getNpmInfo } = require('@package_demo_cli/get-npm-info');
-    getNpmInfo(npmName);
+    const data = await getNpmInfo(npmName);
+    console.log(data);
     // 3.提取所有版本号,对比哪些版本号是大于当前版本号
     // 4.获取最新版号,提示用户更新到该版本号
 }
