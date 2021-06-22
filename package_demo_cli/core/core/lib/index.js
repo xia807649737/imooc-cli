@@ -21,7 +21,7 @@ let config;
 
 function core() {
     try {
-        // checkPkgVersion();
+        checkPkgVersion();
         checkNodeVersion();
         checkRoot();
         checkUserHome();
