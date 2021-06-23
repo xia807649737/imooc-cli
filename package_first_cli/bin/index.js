@@ -22,12 +22,13 @@ program
 // console.log(program.opts());
 
 // command注册命令
-// const clone = program.command('clone <source> [destination]');
-const clone = program.command('clone <source> <destination>');
+const clone = program.command('clone <source> [destination]');
+// const clone = program.command('clone <source> <destination>');
 clone
     .description('clone a repository')
-    .action(() => {
-        console.log('do clone');
+    .option('-f, --force', '是否强制克隆')
+    .action((source, destination, cmdObj) => {
+        console.log('do clone', source, destination, cmdObj.force);
     })
 
 program
