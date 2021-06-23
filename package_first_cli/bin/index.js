@@ -1,7 +1,7 @@
 #!/sr/bin/env node
 
 const commander = require('commander');
-const { option } = require('yargs');
+const { option, describe } = require('yargs');
 
 const pkg = require('../package.json');
 
@@ -15,9 +15,20 @@ program
     .version(pkg.version)
     .option('-d, --debug', '是否开启调试模式', false)
     .option('-e, --envName <envName>', '获取环境变量名称')
-    .parse(process.argv);
 
-    // console.log(program._optionValues.debug); 
-    // console.log(program._optionValues.envName);    
-    // program.outputHelp();
-    // console.log(program.opts());
+// console.log(program._optionValues.debug); 
+// console.log(program._optionValues.envName);    
+// program.outputHelp();
+// console.log(program.opts());
+
+// command注册命令
+// const clone = program.command('clone <source> [destination]');
+const clone = program.command('clone <source> <destination>');
+clone
+    .description('clone a repository')
+    .action(() => {
+        console.log('do clone');
+    })
+
+program
+    .parse(process.argv);
