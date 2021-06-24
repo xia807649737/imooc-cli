@@ -49,17 +49,33 @@ service
 
 program.addCommand(service);
 
-
 //强制用户要输入一个参数
-program
-    .arguments('<cmd> [options]')
-    .description('test command', {
-        cmd: 'command to run',
-        option: 'options for command'
-    })
-    .action((cmd, env) => { 
-        console.log(cmd, env);
-    });
+// program
+//     .arguments('<cmd> [options]')
+//     .description('test command', {
+//         cmd: 'command to run',
+//         option: 'options for command'
+//     })
+//     .action((cmd, env) => { 
+//         console.log(cmd, env);
+//     });
+
+//自定义help信息
+// program.helpInformation = () => { 
+//     return ''
+// }
+
+// program.on('--help', () => { 
+//     console.log('your helpful information');
+// })
+
+//实心debug模式
+program.on('option:debug', () => { 
+    if(program._optionValues.debug) {
+        process.env.LOG_LEVEL = 'verbose';
+    }
+    console.log(process.env.LOG_LEVEL);
+})
 
 
 program
