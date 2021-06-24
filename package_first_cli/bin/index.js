@@ -43,11 +43,23 @@ service
     .command('stop')
     .description('stop service')
     .action(() => { 
-        console.log('please stop service')
+        console.log('please stop service');
     });
 
 
 program.addCommand(service);
+
+
+//强制用户要输入一个参数
+program
+    .arguments('<cmd> [options]')
+    .description('test command', {
+        cmd: 'command to run',
+        option: 'options for command'
+    })
+    .action((cmd, env) => { 
+        console.log(cmd, env);
+    });
 
 
 program
