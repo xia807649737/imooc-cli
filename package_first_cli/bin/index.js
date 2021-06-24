@@ -11,3 +11,4 @@
 // ES Module
 // 加载: import
 // 输出: export default / export function / const
+require('../dist/core');
