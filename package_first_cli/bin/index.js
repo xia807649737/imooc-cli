@@ -42,7 +42,7 @@ service
 service
     .command('stop')
     .description('stop service')
-    .action(() => { 
+    .action(() => {
         console.log('please stop service');
     });
 
@@ -69,14 +69,23 @@ program.addCommand(service);
 //     console.log('your helpful information');
 // })
 
-//实心debug模式
-program.on('option:debug', () => { 
-    if(program._optionValues.debug) {
+//实现debug模式
+program.on('option:debug', () => {
+    if (program._optionValues.debug) {
         process.env.LOG_LEVEL = 'verbose';
     }
     console.log(process.env.LOG_LEVEL);
 })
 
+//对未知命令监听
+program.on('command:*', obj => { 
+    // console.log(obj);
+    console.error(`未知的命令: ${obj[0]}`);
+    // console.log(program.commands[0].name());
+    const availableCommands = program.commands.map(cmd => cmd.name());
+    console.log(availableCommands);
+    console.log(`可用命令: ${availableCommands.join(',')}`)
+})
 
 program
     .parse(process.argv);
