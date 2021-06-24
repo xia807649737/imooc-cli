@@ -6,4 +6,5 @@ module.exports = {
         filename: 'core.js'
     },
     mode: 'production',
+    target: 'node'
 }

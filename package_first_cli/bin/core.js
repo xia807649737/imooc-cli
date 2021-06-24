@@ -1,3 +1,5 @@
-import utils from './utils';
+import path from 'path';
+import { exits } from './utils';
 
-utils();
+console.log(path.resolve('.'));
+console.log(exits(path.resolve('.')));
