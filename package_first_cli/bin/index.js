@@ -21,7 +21,7 @@ program
 // program.outputHelp();
 // console.log(program.opts());
 
-// command 注册命令,在外部指定指令和参数
+// ***command 注册命令,在外部指定指令和参数
 const clone = program.command('clone <source> [destination]');
 // const clone = program.command('clone <source> <destination>');
 clone
@@ -31,7 +31,7 @@ clone
         console.log('do clone', source, destination, cmdObj.force);
     });
 
-//addCommand 注册子命令,在内部指定指令和参数
+//***addCommand 注册子命令,在内部指定指令和参数
 const service = new commander.Command('service');
 service
     .command('start [port]')
