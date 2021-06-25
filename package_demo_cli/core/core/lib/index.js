@@ -16,9 +16,11 @@ const constant = require('./common');
 const userHome = require('user-home');
 const pathExists = require('path-exists').sync;
 
+const commander = require('commander');
 //debug模式启动
 let args;
 // let config;
+const program = new commander.Command();
 
 async function core() {
     try {
@@ -26,14 +28,16 @@ async function core() {
         checkNodeVersion(); // 检查 node 版本
         // checkRoot();     // 检查是否为 root 启动
         checkUserHome();    // 检查用户主目录
-        checkInputArgs();   // 检查用户输入参数
+        // checkInputArgs();   // 检查用户输入参数
         checkEnv();         // 检查环境变量
+        registerCommand();
         await checkGlobalUpdate(); // 检查工具是否需要更新
     } catch (e) {
         log.error(e.message);
     }
 }
 
+//脚手架的启动过程
 function checkPkgVersion() {
     // log.say('test', 'go');
     // log.success('haha', 'success...');
@@ -122,4 +126,42 @@ async function checkGlobalUpdate() {
         log.warn(colors.yellow(`请手动更新${npmName},当前版本:${currentVersion},最新版本:${lastVersion}
         更新命令: npm install -g ${npmName}`));
     }
+}
+
+//脚手架的注册
+function registerCommand() {
+    program
+        .name(Object.keys(pkg.bin)[0])
+        .usage('<command> [options]')
+        .version(pkg.version)
+        .option('-d, --debug', '是否开启调试模式', false)
+
+    //开启debug模式
+    program.on('option:debug', () => {
+        if (program._optionValues.debug) {
+            process.env.LOG_LEVEL = 'verbose';
+        } else {
+            process.env.LOG_LEVEL = 'info';
+        }
+        log.level = process.env.LOG_LEVEL;
+        // log.verbose('test');
+    })
+
+    // 对未知命令监听
+    program.on('command:*', obj => {
+        const availableCommands = program.commands.map(cmd => cmd.name());
+        console.log(colors.red(`未知命令: ${obj[0]}`));
+        if(availableCommands.length >0) {
+            console.log(colors.red(`可用命令: ${availableCommands.join(',')}`));
+        } else {
+            console.log(colors.red(`可用命令: none`));
+        }
+    })
+    program.parse(process.argv);
+
+    if(process.argv && process.argv.length <1) {
+        program.outputHelp();
+        console.log()
+    }
+
 }
