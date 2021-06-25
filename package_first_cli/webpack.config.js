@@ -6,5 +6,5 @@ module.exports = {
         filename: 'core.js'
     },
     mode: 'production',
-    target: 'node'
+    target: 'node', // 默认是web,但是在web环境下不会提供内置库path
 }

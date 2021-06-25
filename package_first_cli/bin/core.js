@@ -1,5 +1,5 @@
 import path from 'path';
-import { exits } from './utils';
+import { exists } from './utils';
 
 console.log(path.resolve('.'));
-console.log(exits(path.resolve('.')));
+console.log(exists(path.resolve('.')));
