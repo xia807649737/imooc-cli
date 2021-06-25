@@ -12,23 +12,23 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: /node_modules|dist/,
                 use: {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env'],
-                        plugins: [
-                            '@babel/plugin-transform-runtime',
-                            {
-                                corejs: 3,
-                                regenerator: true,
-                                useESModules: true,
-                                helpers: true,
-                            },
-                        ],
-                    }
-                }
-            }
+                        // plugins: [
+                        //     '@babel/plugin-transform-runtime',
+                        //     {
+                        //         corejs: 3,
+                        //         regenerator: true,
+                        //         useESModules: true,
+                        //         helpers: true,
+                        //     },
+                        // ],
+                    },
+                },
+            },
         ]
     }
 
