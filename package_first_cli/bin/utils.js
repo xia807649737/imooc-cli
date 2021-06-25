@@ -1,5 +1,5 @@
 import pathExits from 'path-exists';
 
-export function exists(p) {
+export const exists = (p) => {
     return pathExits.sync(p);
 }
