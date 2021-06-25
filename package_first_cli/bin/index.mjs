@@ -12,5 +12,5 @@
 // 加载: import
 // 输出: export default / export function / const
 
-//支持ES Module的方式一: webpack编译 / babel-loader
-require('../dist/core');
+//支持ES Module的方式二: node
+import './core.mjs';
