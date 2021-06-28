@@ -25,14 +25,8 @@ const program = new commander.Command();
 
 const core = async () => {
     try {
-        checkPkgVersion();  // 检查当前运行版本
-        checkNodeVersion(); // 检查 node 版本
-        // checkRoot();     // 检查是否为 root 启动
-        checkUserHome();    // 检查用户主目录
-        // checkInputArgs();   // 检查用户输入参数
-        checkEnv();         // 检查环境变量
+        prepair();
         registerCommand();
-        await checkGlobalUpdate(); // 检查工具是否需要更新
     } catch (e) {
         log.error(e.message);
     }
@@ -61,8 +55,7 @@ const checkNodeVersion = () => {
 
 const checkRoot = () => {
     let rootCheck = require('root-check');
-    rootCheck(colors.red('请避免使用 root 账户启动本应用'));
-    // console.log(process.geteuid);
+    rootCheck();
 }
 
 const checkUserHome = () => {
@@ -98,7 +91,7 @@ const checkEnv = () => {
     // config = createCliConfig(); // 准备基础配置
     // log.verbose('环境变量', config);
     createCliConfig(); // 准备基础配置
-    log.verbose('环境变量', process.env.CLI_HOME_PATH);
+    // log.verbose('环境变量', process.env.CLI_HOME_PATH);
 }
 
 const createCliConfig = () => {
@@ -136,7 +129,7 @@ const registerCommand = () => {
     .usage('<command> [options]')
     .version(pkg.version)
     .option('-d, --debug', '是否开启调试模式', false)
-    
+    .option('-tp, --targetPath <targetPath>', '是否指定本地调试文件路径', '')  
     //命令的注册
     program
     .command('init [projectName]')
@@ -152,8 +145,14 @@ const registerCommand = () => {
         }
         log.level = process.env.LOG_LEVEL;
         // log.verbose('test');
-    })
+    });
     
+    //指定targetPath
+    program.on('option:targetPath', () => { 
+        // console.log(program._optionValues.targetPath);
+        process.env.CLI_TARGET_PATH = program._optionValues.targetPath;
+    });
+
     // 对未知命令监听
     program.on('command:*', obj => {
         const availableCommands = program.commands.map(cmd => cmd.name());
@@ -163,7 +162,7 @@ const registerCommand = () => {
         } else {
             console.log(colors.red(`可用命令: none`));
         }
-    })
+    });
     
     program.parse(process.argv);
     
@@ -171,6 +170,17 @@ const registerCommand = () => {
         program.outputHelp();
         console.log();
     }
+}
+
+//
+const prepair = async () => {
+    checkPkgVersion();  // 检查当前运行版本
+    // checkNodeVersion(); // 检查 node 版本
+    checkRoot();     // 检查是否为 root 启动
+    checkUserHome();    // 检查用户主目录
+    // checkInputArgs();   // 检查用户输入参数
+    checkEnv();         // 检查环境变量
+    await checkGlobalUpdate(); // 检查工具是否需要更新
 }
 
 module.exports = core;
