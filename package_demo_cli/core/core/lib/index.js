@@ -1,6 +1,5 @@
 'use strict';
 
-module.exports = core;
 
 const path = require('path');
 //外部依赖在前面
@@ -24,7 +23,7 @@ let args;
 // let config;
 const program = new commander.Command();
 
-async function core() {
+const core = async () => {
     try {
         checkPkgVersion();  // 检查当前运行版本
         checkNodeVersion(); // 检查 node 版本
@@ -40,7 +39,7 @@ async function core() {
 }
 
 //脚手架的启动过程
-function checkPkgVersion() {
+const checkPkgVersion = () => {
     // log.say('test', 'go');
     // log.success('haha', 'success...');
     // log.verbose('debug', 'debug...');
@@ -48,7 +47,7 @@ function checkPkgVersion() {
     log.info('core', pkg.version);
 }
 
-function checkNodeVersion() {
+const checkNodeVersion = () => {
     // 第一步,获取当前版本号
     const currentVersion = process.version;
     // console.log(currentVersion);
@@ -60,20 +59,20 @@ function checkNodeVersion() {
     }
 }
 
-function checkRoot() {
+const checkRoot = () => {
     let rootCheck = require('root-check');
     rootCheck(colors.red('请避免使用 root 账户启动本应用'));
     // console.log(process.geteuid);
 }
 
-function checkUserHome() {
+const checkUserHome = () => {
     // console.log(userHome);
     if (!userHome || !pathExists(userHome)) {
         throw new Error(colors.red('当前用户住主目录不存在!'));
     }
 }
 
-function checkInputArgs() {
+const checkInputArgs = () => {
     let minimist = require('minimist');
     args = minimist(process.argv.slice(2));
     // console.log(args);
@@ -81,7 +80,7 @@ function checkInputArgs() {
     // log.verbose('debug', 'test debug log');
 }
 
-function checkArgs() {
+const checkArgs = () => {
     if (args.debug) {
         process.env.LOG_LEVEL = 'verbose';
     } else {
@@ -90,7 +89,7 @@ function checkArgs() {
     log.level = process.env.LOG_LEVEL;
 }
 
-function checkEnv() {
+const checkEnv = () => {
     // log.verbose('开始检查环境变量');
     let dotenv = require('dotenv');
     dotenv.config({
@@ -102,7 +101,7 @@ function checkEnv() {
     log.verbose('环境变量', process.env.CLI_HOME_PATH);
 }
 
-function createCliConfig() {
+const createCliConfig = () => {
     let cliConfig = {
         home: userHome,
     };
@@ -115,7 +114,7 @@ function createCliConfig() {
     // return cliConfig;
 }
 
-async function checkGlobalUpdate() {
+const checkGlobalUpdate = async () => {
     // 1.获取当前版本号和模块名
     const currentVersion = pkg.version;
     const npmName = pkg.name;
@@ -131,19 +130,19 @@ async function checkGlobalUpdate() {
 }
 
 //脚手架的注册
-function registerCommand() {
+const registerCommand = () => {
     program
-        .name(Object.keys(pkg.bin)[0])
-        .usage('<command> [options]')
-        .version(pkg.version)
-        .option('-d, --debug', '是否开启调试模式', false)
-
+    .name(Object.keys(pkg.bin)[0])
+    .usage('<command> [options]')
+    .version(pkg.version)
+    .option('-d, --debug', '是否开启调试模式', false)
+    
     //命令的注册
     program
-        .command('init [projectName]')
-        .option('-f, --force', '是否强制初始化项目')
-        .action(init);
-
+    .command('init [projectName]')
+    .option('-f, --force', '是否强制初始化项目')
+    .action(init);
+    
     //开启debug模式
     program.on('option:debug', () => {
         if (program._optionValues.debug) {
@@ -154,23 +153,24 @@ function registerCommand() {
         log.level = process.env.LOG_LEVEL;
         // log.verbose('test');
     })
-
+    
     // 对未知命令监听
     program.on('command:*', obj => {
         const availableCommands = program.commands.map(cmd => cmd.name());
         console.log(colors.red(`未知命令: ${obj[0]}`));
-        if(availableCommands.length >0) {
+        if (availableCommands.length > 0) {
             console.log(colors.red(`可用命令: ${availableCommands.join(',')}`));
         } else {
             console.log(colors.red(`可用命令: none`));
         }
     })
-
+    
     program.parse(process.argv);
-
-    if(process.argv && process.argv.length <1) {
+    
+    if (process.argv && process.argv.length < 1) {
         program.outputHelp();
         console.log();
     }
-
 }
+
+module.exports = core;
