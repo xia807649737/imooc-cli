@@ -11,6 +11,8 @@ const colors = require('colors/safe');
 const pkg = require('../package.json');
 const log = require('@package_demo_cli/log');
 const constant = require('./common');
+const init = require('@package_demo_cli/init');
+
 
 //用户主目录
 const userHome = require('user-home');
@@ -140,9 +142,7 @@ function registerCommand() {
     program
         .command('init [projectName]')
         .option('-f, --force', '是否强制初始化项目')
-        .action((projectName, cmdObj) => {
-            console.log('init', projectName, cmdObj.force);
-        });
+        .action(init);
 
     //开启debug模式
     program.on('option:debug', () => {
