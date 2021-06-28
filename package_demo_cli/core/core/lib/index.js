@@ -11,6 +11,7 @@ const pkg = require('../package.json');
 const log = require('@package_demo_cli/log');
 const constant = require('./common');
 const init = require('@package_demo_cli/init');
+const exec = require('@package_demo_cli/exec');
 
 
 //用户主目录
@@ -53,11 +54,6 @@ const checkNodeVersion = () => {
     }
 }
 
-const checkRoot = () => {
-    let rootCheck = require('root-check');
-    rootCheck();
-}
-
 const checkUserHome = () => {
     // console.log(userHome);
     if (!userHome || !pathExists(userHome)) {
@@ -70,7 +66,7 @@ const checkInputArgs = () => {
     args = minimist(process.argv.slice(2));
     // console.log(args);
     checkArgs()
-    // log.verbose('debug', 'test debug log');
+    log.verbose('debug', 'test debug log');
 }
 
 const checkArgs = () => {
@@ -134,7 +130,7 @@ const registerCommand = () => {
     program
     .command('init [projectName]')
     .option('-f, --force', '是否强制初始化项目')
-    .action(init);
+    .action(exec);
     
     //开启debug模式
     program.on('option:debug', () => {
@@ -176,7 +172,6 @@ const registerCommand = () => {
 const prepair = async () => {
     checkPkgVersion();  // 检查当前运行版本
     // checkNodeVersion(); // 检查 node 版本
-    checkRoot();     // 检查是否为 root 启动
     checkUserHome();    // 检查用户主目录
     // checkInputArgs();   // 检查用户输入参数
     checkEnv();         // 检查环境变量
