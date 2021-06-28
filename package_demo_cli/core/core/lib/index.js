@@ -136,6 +136,14 @@ function registerCommand() {
         .version(pkg.version)
         .option('-d, --debug', '是否开启调试模式', false)
 
+    //命令的注册
+    program
+        .command('init [projectName]')
+        .option('-f, --force', '是否强制初始化项目')
+        .action((projectName, cmdObj) => {
+            console.log('init', projectName, cmdObj.force);
+        });
+
     //开启debug模式
     program.on('option:debug', () => {
         if (program._optionValues.debug) {
@@ -157,6 +165,7 @@ function registerCommand() {
             console.log(colors.red(`可用命令: none`));
         }
     })
+
     program.parse(process.argv);
 
     if(process.argv && process.argv.length <1) {
