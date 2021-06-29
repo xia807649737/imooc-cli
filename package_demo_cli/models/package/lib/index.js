@@ -2,7 +2,7 @@
 
 class Package {
     constructor() {
-        console.log('Package constructor');
+        console.log('Package constructor test');
     }
 }
 
