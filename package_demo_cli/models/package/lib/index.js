@@ -1,5 +1,6 @@
 'use strict';
-
+const path = require('path');
+const pkgDir = require('pkg-dir').sync;
 const { isObject } = require('@package_demo_cli/utils');
 class Package {
     constructor(options) {
@@ -9,9 +10,9 @@ class Package {
         if (!isObject(options)) {
             throw new Error('Package类的options参数必须为对象!')
         }
-        // package的路径
+        // package的目标路径
         this.targetPath = options.targetPath;
-        // package的存储路径
+        // package的缓存路径
         this.storePath = options.storePath;
         // package的name
         this.packageName = options.packageName;
@@ -20,25 +21,37 @@ class Package {
     }
 
     // 判断Package是否存在
-    exists() { 
+    exists() {
 
     }
 
     // 安装Package
-    install() { 
+    install() {
 
     }
 
     // 更新Package
-    update() { 
+    update() {
 
     }
 
     // 获取入口文件路径
-    getRootFilePath() { 
-
+    getRootFilePath() {
+        //1. 获取package.json所在的目录
+        const dir = pkgDir(this.targetPath);
+        // console.log(dir);
+        if (dir) {
+            //2. 读取package.json - require()
+            const pkgFile = require(path.resolve(dir, 'package.json'));
+            // console.log(pkgFile);
+            //3. 寻找main/lib
+            if (pkgFile && pkgFile.main) { 
+                //4. 路径的兼容(macOS/window)
+                return path.resolve(dir, pkgFile.main);
+            }
+        }
+        return null;
     }
 }
 
 module.exports = Package;
-
