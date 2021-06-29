@@ -1,7 +1,7 @@
 {
-  "name": "@package_demo_cli/exec",
+  "name": "@package_demo_cli/package",
   "version": "1.0.0",
-  "description": "package_demo_cli execute",
+  "description": "package_demo_cli npm modules",
   "author": "xiahong <807649737@qq.com>",
   "homepage": "https://github.com/xia807649737/imooc-cli#readme",
   "license": "ISC",
@@ -25,8 +25,5 @@
   },
   "bugs": {
     "url": "https://github.com/xia807649737/imooc-cli/issues"
-  },
-  "dependencies": {
-    "@package_demo_cli/package": "file:../../models/package"
   }
 }
