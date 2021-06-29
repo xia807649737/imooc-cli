@@ -1,19 +1,16 @@
 'use strict';
 
 const Package = require('@package_demo_cli/package');
+const log = require('@package_demo_cli/log');
 
 const exec = () => {
+    const targetPath = process.env.CLI_TARGET_PATH;
+    const homePath = process.env.CLI_HOME_PATH;
+    log.verbose('targetPath', targetPath)
+    log.verbose('homePath', homePath)
     const pkg = new Package();
-    console.log(pkg)
-    console.log('exec');
-    console.log(process.env.CLI_TARGET_PATH);
-    console.log(process.env.CLI_HOME_PATH);
-    //1.targetPath -> modulePath
-    //2.modulePath -> Package(npm 模块)
-    //3.Package.getRootFile(获取入口文件)
-    
+    console.log(pkg);
 
-    //
 }
 
 module.exports = exec;
