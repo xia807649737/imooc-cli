@@ -1,10 +1,11 @@
 'use strict';
 const path = require('path');
 const pkgDir = require('pkg-dir').sync;
+const pathExists = require('path-exists');
 const npminstall = require('npminstall');
 const { isObject } = require('@package_demo_cli/utils');
 const formatPath = require('@package_demo_cli/format-path');
-const { getDefaultRegitry } = require('@package_demo_cli/get-npm-info');
+const { getDefaultRegitry, getNpmLatestVersion } = require('@package_demo_cli/get-npm-info');
 
 class Package {
     constructor(options) {
@@ -24,13 +25,25 @@ class Package {
         this.packageVersion = options.packageVersion;
     }
 
+    async prepare() { 
+        if (this.packageVersion === 'latest') { 
+            this.packageVersion = await getNpmLatestVersion(this.packageName);
+        } else {
+            this.packageVersion = '1.0.5';
+        }
+    }
     // 判断Package是否存在
-    exists() {
-
+    async exists() {
+        if (this.storeDir) { 
+            await this.prepare();
+        } else {
+            return pathExists(this.targetPath);
+        }
     }
 
-    // 安装Package
+    // 安装Package,有问题没解决
     install() {
+        await this.prepare();
         return npminstall({
             root: this.targetPath,
             storeDir: this.storeDir,

@@ -14,9 +14,6 @@ const exec = async () => {
     let storeDir = '';
     let pkg = null;
     const homePath = process.env.CLI_HOME_PATH;
-    // log.verbose('targetPath', targetPath);
-    // log.verbose('homePath', homePath);
-
     const cmdObj = arguments[arguments.length - 1];
     const packageName = SETTINGS[cmdObj];
     const packageVersion = 'lastest';
@@ -33,7 +30,7 @@ const exec = async () => {
             packageName,
             packageVersion
         });
-        if (pkg.exists()) {
+        if (await pkg.exists()) {
 
         } else {
            await pkg.install();
@@ -46,6 +43,7 @@ const exec = async () => {
             packageVersion
         });
     }
+    console.log(await pkg.exists());
     const rootFile = pkg.getRootFilePath();
     if (rootFile) { 
         require(rootFile).apply(null, arguments); 
