@@ -23,7 +23,6 @@ const exec = () => {
     }
     const pkg = new Package({
         targetPath,
-        // storePath,
         packageName,
         packageVersion
       });

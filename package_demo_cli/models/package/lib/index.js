@@ -35,9 +35,10 @@ class Package {
             root: this.targetPath,
             storeDir: this.storeDir,
             registry: getDefaultRegitry(),
-            pkgs: [
-                { name: 'foo', version: '^~1.0.0'},
-            ],
+            pkgs: [{
+                    name: this.packageName,
+                    version: this.packageVersion
+                }],
         })
     }
 
@@ -56,7 +57,7 @@ class Package {
             const pkgFile = require(path.resolve(dir, 'package.json'));
             // console.log(pkgFile);
             //3. 寻找main/lib
-            if (pkgFile && pkgFile.main) { 
+            if (pkgFile && pkgFile.main) {
                 //4. 路径的兼容(macOS/window)
                 return formatPath(path.resolve(dir, pkgFile.main));
             }
