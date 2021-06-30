@@ -4,7 +4,6 @@ const urlJoin = require('url-join');
 const semver = require('semver');
 
 const getNpmInfo = (npmName, registry) => {
-    // TODO
     // console.log(npmName);
     if (!npmName) return null;
     const regitryUrl = registry || getDefaultRegitry();
@@ -48,4 +47,4 @@ const getNmpSemverVersion = async (baseVersion, npmName, registry) => {
     }
 }
 
-module.exports = { getNmpSemverVersion };
+module.exports = { getNmpSemverVersion, getDefaultRegitry };
