@@ -27,10 +27,10 @@
     "url": "https://github.com/xia807649737/imooc-cli/issues"
   },
   "dependencies": {
-    "@package_demo_cli/get-npm-info": "file:../../utils/get-npm-info",
-    "@package_demo_cli/log": "file:../../utils/log",
-    "@package_demo_cli/init": "file:../../commands/init",
     "@package_demo_cli/exec": "file:../exec",
+    "@package_demo_cli/get-npm-info": "file:../../utils/get-npm-info",
+    "@package_demo_cli/init": "file:../../commands/init",
+    "@package_demo_cli/log": "file:../../utils/log",
     "@package_demo_cli/utils": "^1.0.5",
     "colors": "^1.4.0",
     "commander": "^8.0.0",

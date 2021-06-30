@@ -2,6 +2,8 @@
 const path = require('path');
 const pkgDir = require('pkg-dir').sync;
 const { isObject } = require('@package_demo_cli/utils');
+const formatPath = require('@package_demo_cli/format-path');
+
 class Package {
     constructor(options) {
         if (!options) {
@@ -47,7 +49,7 @@ class Package {
             //3. 寻找main/lib
             if (pkgFile && pkgFile.main) { 
                 //4. 路径的兼容(macOS/window)
-                return path.resolve(dir, pkgFile.main);
+                return formatPath(path.resolve(dir, pkgFile.main));
             }
         }
         return null;
