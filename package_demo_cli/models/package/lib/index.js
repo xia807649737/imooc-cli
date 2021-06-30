@@ -31,11 +31,6 @@ class Package {
 
     // 安装Package
     install() {
-
-    }
-
-    // 更新Package
-    update() {
         npminstall({
             root: this.targetPath,
             storeDir: this.storeDir,
@@ -44,6 +39,11 @@ class Package {
                 { name: 'foo', version: '^~1.0.0'},
             ],
         })
+    }
+
+    // 更新Package
+    update() {
+
     }
 
     // 获取入口文件路径
