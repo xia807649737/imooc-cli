@@ -1,8 +1,10 @@
 'use strict';
 const path = require('path');
 const pkgDir = require('pkg-dir').sync;
+const npminstall = require('npminstall');
 const { isObject } = require('@package_demo_cli/utils');
 const formatPath = require('@package_demo_cli/format-path');
+const { getDefaultRegitry } = require('@package_demo_cli/get-npm-info');
 
 class Package {
     constructor(options) {
@@ -14,8 +16,8 @@ class Package {
         }
         // package的目标路径
         this.targetPath = options.targetPath;
-        // package的缓存路径
-        this.storePath = options.storePath;
+        // 缓存package的路径
+        this.storeDir = options.storeDir;
         // package的name
         this.packageName = options.packageName;
         // package的version
@@ -34,7 +36,14 @@ class Package {
 
     // 更新Package
     update() {
-
+        npminstall({
+            root: this.targetPath,
+            storeDir: this.storeDir,
+            registry: getDefaultRegitry(),
+            pkgs: [
+                { name: 'foo', version: '^~1.0.0'},
+            ],
+        })
     }
 
     // 获取入口文件路径

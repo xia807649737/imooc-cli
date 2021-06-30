@@ -29,6 +29,8 @@
   "dependencies": {
     "@package_demo_cli/format-path": "file:../../utils/format-path",
     "@package_demo_cli/utils": "file:../../utils/utils",
+    "@package_demo_cli/get-npm-info": "file:../../utils/get-npm-info",
+    "npminstall": "^4.11.0",
     "pkg-dir": "^5.0.0"
   }
 }

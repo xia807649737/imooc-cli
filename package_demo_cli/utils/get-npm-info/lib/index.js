@@ -3,7 +3,7 @@ const axios = require('axios');
 const urlJoin = require('url-join');
 const semver = require('semver');
 
-function getNpmInfo(npmName, registry) {
+const getNpmInfo = (npmName, registry) => {
     // TODO
     // console.log(npmName);
     if (!npmName) return null;
@@ -20,11 +20,11 @@ function getNpmInfo(npmName, registry) {
     });
 }
 
-function getDefaultRegitry(isOriginal = false) {
+const getDefaultRegitry = (isOriginal = false) => {
     return isOriginal ? 'http://registry.npmmjs.org' : 'http://registry.npm.taobao.org';
 }
 
-async function getNpmVersions(npmName, registry) {
+const getNpmVersions = async (npmName, registry) => {
     // return getNpmInfo(npmName, registry);
     const data = await getNpmInfo(npmName, registry);
     if (data) {
@@ -34,13 +34,13 @@ async function getNpmVersions(npmName, registry) {
     }
 }
 
-function getSemverVersions(baseVersion, versions) {
+const getSemverVersions = (baseVersion, versions) => {
     return versions.filter(version =>
         semver.satisfies(version, `^${baseVersion}`)
     ).sort((a, b) => semver.gt(b, a));
 }
 
-async function getNmpSemverVersion(baseVersion, npmName, registry) {
+const getNmpSemverVersion = async (baseVersion, npmName, registry) => {
     const versions = await getNpmVersions(npmName, registry);
     const newVersions = getSemverVersions(baseVersion, versions);
     if (newVersions && newVersions.length > 0) {
