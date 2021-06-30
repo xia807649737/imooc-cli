@@ -1,4 +1,4 @@
-import path, { resolve } from 'path';
+import path from 'path';
 import { exists } from './utils';
 
 console.log(path.resolve('.'));

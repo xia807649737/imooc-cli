@@ -16,6 +16,7 @@
   "dependencies": {
     "babel-loader": "^8.2.2",
     "commander": "^7.2.0",
+    "npminstall": "^4.11.0",
     "package_first_lib": "^1.0.0",
     "path-exists": "^4.0.0",
     "yargs": "^17.0.1"
