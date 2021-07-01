@@ -42,7 +42,7 @@ class Package {
     }
 
     // 安装Package,有问题没解决
-    install() {
+    async install() {
         await this.prepare();
         return npminstall({
             root: this.targetPath,

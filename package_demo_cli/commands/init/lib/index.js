@@ -2,7 +2,7 @@
 
 
 const init = (projectName, cmdObj) => {
-    console.log('init', projectName, cmdObj.force, process.env.CLI_TARGET_PATH);
+    console.log('init', projectName, cmdObj.force, cmdObj.parent.targetPath);
 }
 
 module.exports = init;

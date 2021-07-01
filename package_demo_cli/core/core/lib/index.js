@@ -167,7 +167,6 @@ const registerCommand = () => {
     
     if (process.argv && process.argv.length < 1) {
         program.outputHelp();
-        console.log();
     }
 }
 
