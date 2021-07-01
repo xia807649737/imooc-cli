@@ -10,21 +10,22 @@ const log = require('@package_demo_cli/log');
 // const CACHE_DIR = 'dependcies';
 
 const exec = async () => {
-    console.log(process.env.CLI_TARGET_PATH)
-    console.log(process.env.CLI_HOME_PATH)
     let targetPath = process.env.CLI_TARGET_PATH;
-    // const homePath = process.env.CLI_HOME_PATH;
-    let storeDir = '';
+    const homePath = process.env.CLI_HOME_PATH;
+    log.verbose('targetPath', targetPath);
+    log.verbose('homePath', homePath);
+
+    // let storeDir = '';
     // const cmdObj = arguments[arguments.length - 1];
     // const cmdName = cmdObj.name();
     // const packageName = SETTINGS[cmdName];
-    const packageVersion = 'latest';
-    // let pkg = new Package({
-    //     targetPath,
-    //     packageName,
-    //     packageVersion
-    // });
-    // console.log(pkg)
+    // const packageVersion = 'latest';
+    let pkg = new Package({
+        targetPath,
+        // packageName,
+        // packageVersion
+    });
+    console.log(pkg)
     // if (!targetPath) {
     // 生成缓存存路径
     // targetPath = path.resolve(homePath, CACHE_DIR);
