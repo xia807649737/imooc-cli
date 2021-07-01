@@ -3,8 +3,8 @@ const path = require('path');
 const pkgDir = require('pkg-dir').sync;
 // const pathExists = require('path-exists');
 // const npminstall = require('npminstall');
-const { isObject } = require('@package_demo_cli/utils');
 const formatPath = require('@package_demo_cli/format-path');
+const { isObject } = require('@package_demo_cli/utils');
 // const { getDefaultRegitry, getNpmLatestVersion } = require('@package_demo_cli/get-npm-info');
 
 class Package {
