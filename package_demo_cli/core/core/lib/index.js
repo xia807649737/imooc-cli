@@ -46,6 +46,7 @@ const checkPkgVersion = () => {
 }
 
 const checkRoot = () => {
+    // bug: 总是提示root-check里面有个downgrade-root的包有问题,root-check降级处理
     const rootCheck = require('root-check');
     rootCheck();
 }
