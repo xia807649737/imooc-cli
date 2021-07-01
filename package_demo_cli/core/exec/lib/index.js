@@ -4,14 +4,14 @@ const path = require('path');
 const Package = require('@package_demo_cli/package');
 const log = require('@package_demo_cli/log');
 
-const SETTINGS = {
-    init: '@package_demo_cli/init',
-}
-const CACHE_DIR = 'dependcies';
+// const SETTINGS = {
+//     init: '@package_demo_cli/init',
+// }
+// const CACHE_DIR = 'dependcies';
 
 const exec = async () => {
-    // console.log(process.env.CLI_TARGET_PATH)
-    // console.log(process.env.CLI_HOME_PATH)
+    console.log(process.env.CLI_TARGET_PATH)
+    console.log(process.env.CLI_HOME_PATH)
     let targetPath = process.env.CLI_TARGET_PATH;
     // const homePath = process.env.CLI_HOME_PATH;
     let storeDir = '';
