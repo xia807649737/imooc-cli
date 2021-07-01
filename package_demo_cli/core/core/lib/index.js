@@ -45,6 +45,11 @@ const checkPkgVersion = () => {
     log.info('core', pkg.version);
 }
 
+const checkRoot = () => {
+    const rootCheck = require('root-check');
+    rootCheck();
+}
+
 const checkNodeVersion = () => {
     // 第一步,获取当前版本号
     const currentVersion = process.version;
@@ -171,9 +176,9 @@ const registerCommand = () => {
     }
 }
 
-//
 const prepair = async () => {
     checkPkgVersion();  // 检查当前运行版本
+    checkRoot();
     // checkNodeVersion(); // 检查 node 版本
     checkUserHome();    // 检查用户主目录
     // checkInputArgs();   // 检查用户输入参数
