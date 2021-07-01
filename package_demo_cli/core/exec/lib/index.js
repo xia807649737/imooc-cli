@@ -5,7 +5,7 @@ const Package = require('@package_demo_cli/package');
 const log = require('@package_demo_cli/log');
 
 const SETTINGS = {
-    init: '@imooc_cli/init',
+    init: '@package_demo_cli/init',
 }
 const CACHE_DIR = 'dependcies';
 
@@ -20,7 +20,7 @@ const exec = async () => {
     const packageName = SETTINGS[cmdObj];
     const packageVersion = 'lastest';
     if (!targetPath) {
-        生成缓存存路径
+        // 生成缓存存路径
         targetPath = path.resolve(homePath, CACHE_DIR);
         storeDir = path.resolve(targetPath, 'node_modules');
         log.verbose('targetPath', targetPath);
