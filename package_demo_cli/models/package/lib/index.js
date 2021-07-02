@@ -65,11 +65,11 @@ class Package {
     getRootFilePath() {
         //1. 获取package.json所在的目录
         const dir = pkgDir(this.targetPath);
-        log.verbose('dir',dir);
+        // log.verbose('dir',dir);
         if (dir) {
             //2. 读取package.json - require()
             const pkgFile = require(path.resolve(dir, 'package.json'));
-            // console.log(pkgFile);
+            // log.verbose('pkgFile', pkgFile);
             //3. 寻找main/lib
             if (pkgFile && pkgFile.main) {
                 //4. 路径的兼容(macOS/window)

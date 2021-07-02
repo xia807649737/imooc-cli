@@ -2,7 +2,6 @@
   "name": "package_demo_cli",
   "version": "1.0.0",
   "description": "package_demo_cli",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
