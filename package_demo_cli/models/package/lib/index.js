@@ -1,12 +1,12 @@
 'use strict';
 const path = require('path');
 const pkgDir = require('pkg-dir').sync;
-// const pathExists = require('path-exists');
-// const npminstall = require('npminstall');
+const pathExists = require('path-exists');
+const npminstall = require('npminstall');
 const formatPath = require('@package_demo_cli/format-path');
 const log = require('@package_demo_cli/log');
 const { isObject } = require('@package_demo_cli/utils');
-// const { getDefaultRegitry, getNpmLatestVersion } = require('@package_demo_cli/get-npm-info');
+const { getDefaultRegitry, getNpmLatestVersion } = require('@package_demo_cli/get-npm-info');
 
 class Package {
     constructor(options) {
@@ -19,7 +19,7 @@ class Package {
         // package的目标路径
         this.targetPath = options.targetPath;
         // 缓存package的路径
-        // this.storeDir = options.storeDir;
+        this.storeDir = options.storeDir;
         // package的name
         this.packageName = options.packageName;
         // package的version
@@ -43,18 +43,18 @@ class Package {
     // }
 
     // 安装Package,有问题没解决
-    // async install() {
-    //     await this.prepare();
-    //     return npminstall({
-    //         root: this.targetPath,
-    //         storeDir: this.storeDir,
-    //         registry: getDefaultRegitry(),
-    //         pkgs: [{
-    //                 name: this.packageName,
-    //                 version: this.packageVersion
-    //             }],
-    //     })
-    // }
+    async install() {
+        // await this.prepare();
+        return npminstall({
+            root: this.targetPath,
+            storeDir: this.storeDir,
+            registry: getDefaultRegitry(),
+            pkgs: [{
+                    name: this.packageName,
+                    version: this.packageVersion
+                }],
+        })
+    }
 
     // 更新Package
     update() {

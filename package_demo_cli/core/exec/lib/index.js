@@ -7,48 +7,52 @@ const log = require('@package_demo_cli/log');
 const SETTINGS = {
     init: '@package-demo-cli/init',
 }
-// const CACHE_DIR = 'dependcies';
+const CACHE_DIR = 'dependencies';
 
 async function exec() {
     let targetPath = process.env.CLI_TARGET_PATH;
     const homePath = process.env.CLI_HOME_PATH;
-    log.verbose('targetPath', targetPath);
-    log.verbose('homePath', homePath);
-    // let storeDir = '';
-
+    // log.verbose('targetPath', targetPath);
+    // log.verbose('homePath', homePath);
+    let storeDir = '';
+    // let pkg;
     // log.verbose('arguments',arguments);
     const cmdObj = arguments[arguments.length - 1];
     const cmdName = cmdObj.name();
     const packageName = SETTINGS[cmdName];
     const packageVersion = 'latest';
-    const pkg = new Package({
-        targetPath,
-        packageName,
-        packageVersion
-    });
-    log.verbose('rootFilePath', pkg.getRootFilePath());
+    // const pkg = new Package({
+    //     targetPath,
+    //     packageName,
+    //     packageVersion
+    // });
 
     if (!targetPath) {
     // 生成缓存存路径
-    // targetPath = path.resolve(homePath, CACHE_DIR);
-    // storeDir = path.resolve(targetPath, 'node_modules');
-    // log.verbose('targetPath', targetPath);
-    // log.verbose('storeDir', storeDir);
+    targetPath = path.resolve(homePath, CACHE_DIR);
+    storeDir = path.resolve(targetPath, 'node_modules');
+    log.verbose('targetPath', targetPath);
+    log.verbose('storeDir', storeDir);
     // pkg = new Package({ storeDir });
-
     // if (await pkg.exists()) {
-
-    } 
-    // else {
+    //}  else {
     //    await pkg.install();
     // }
-    // } else {
+    } 
+    // else {
     //     pkg = new Package({
     //         targetPath,
     //         packageName,
     //         packageVersion
     //     });
     // }
+    const pkg = new Package({
+            targetPath,
+            storeDir,
+            packageName,
+            packageVersion
+        });
+    log.verbose('rootFilePath', pkg.getRootFilePath());
     // log.verbose('exists', await pkg.exists());
 
     // const rootFile = pkg.getRootFilePath();
