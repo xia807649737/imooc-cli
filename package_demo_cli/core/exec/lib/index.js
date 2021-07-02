@@ -4,21 +4,21 @@ const path = require('path');
 const Package = require('@package_demo_cli/package');
 const log = require('@package_demo_cli/log');
 
-// const SETTINGS = {
-//     init: '@package-demo-cli/init',
-// }
+const SETTINGS = {
+    init: '@package-demo-cli/init',
+}
 // const CACHE_DIR = 'dependcies';
 
-const exec = async () => {
+async function exec() {
     let targetPath = process.env.CLI_TARGET_PATH;
     const homePath = process.env.CLI_HOME_PATH;
     log.verbose('targetPath', targetPath);
     log.verbose('homePath', homePath);
-
-    console.log(arguments);
     // let storeDir = '';
-    // const cmdObj = arguments[arguments.length - 1];
-    // const cmdName = cmdObj.name();
+
+    // console.log(arguments);
+    const cmdObj = arguments[arguments.length - 1];
+    const cmdName = cmdObj.name();
     // const packageName = SETTINGS[cmdName];
     // const packageVersion = 'latest';
     const pkg = new Package({

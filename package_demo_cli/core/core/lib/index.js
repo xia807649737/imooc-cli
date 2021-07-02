@@ -24,20 +24,20 @@ let args;
 // let config;
 const program = new commander.Command();
 
-const core = async () => {
+async function core() {
     try {
-        prepair();
+        await prepair();
         registerCommand();
     } catch (e) {
         log.error(e.message);
-        if (program.debug) { 
+        if (program.debug) {
             console.log(e);
         }
     }
 }
 
 //脚手架的启动过程
-const checkPkgVersion = () => {
+function checkPkgVersion() {
     // log.say('test', 'go');
     // log.success('haha', 'success...');
     // log.verbose('debug', 'debug...');
@@ -45,13 +45,13 @@ const checkPkgVersion = () => {
     log.info('core', pkg.version);
 }
 
-const checkRoot = () => {
+function checkRoot() {
     // bug: 总是提示root-check里面有个downgrade-root的包有问题,root-check降级处理
     const rootCheck = require('root-check');
     rootCheck();
 }
 
-const checkNodeVersion = () => {
+function checkNodeVersion() {
     // 第一步,获取当前版本号
     const currentVersion = process.version;
     // console.log(currentVersion);
@@ -63,14 +63,14 @@ const checkNodeVersion = () => {
     }
 }
 
-const checkUserHome = () => {
+function checkUserHome() {
     // console.log(userHome);
     if (!userHome || !pathExists(userHome)) {
         throw new Error(colors.red('当前用户住主目录不存在!'));
     }
 }
 
-const checkInputArgs = () => {
+function checkInputArgs() {
     let minimist = require('minimist');
     args = minimist(process.argv.slice(2));
     // console.log(args);
@@ -78,7 +78,7 @@ const checkInputArgs = () => {
     log.verbose('debug', 'test debug log');
 }
 
-const checkArgs = () => {
+function checkArgs() {
     if (args.debug) {
         process.env.LOG_LEVEL = 'verbose';
     } else {
@@ -87,7 +87,7 @@ const checkArgs = () => {
     log.level = process.env.LOG_LEVEL;
 }
 
-const checkEnv = () => {
+function checkEnv() {
     // log.verbose('开始检查环境变量');
     let dotenv = require('dotenv');
     dotenv.config({
@@ -99,7 +99,7 @@ const checkEnv = () => {
     // log.verbose('环境变量', process.env.CLI_HOME_PATH);
 }
 
-const createCliConfig = () => {
+function createCliConfig() {
     let cliConfig = {
         home: userHome,
     };
@@ -112,7 +112,7 @@ const createCliConfig = () => {
     // return cliConfig;
 }
 
-const checkGlobalUpdate = async () => {
+async function checkGlobalUpdate() {
     // 1.获取当前版本号和模块名
     const currentVersion = pkg.version;
     const npmName = pkg.name;
@@ -128,20 +128,20 @@ const checkGlobalUpdate = async () => {
 }
 
 //脚手架的注册
-const registerCommand = () => {
+function registerCommand() {
     program
-    .name(Object.keys(pkg.bin)[0])
-    .usage('<command> [options]')
-    .version(pkg.version)
-    .option('-d, --debug', '是否开启调试模式', false)
-    .option('-tp, --targetPath <targetPath>', '是否指定本地调试文件路径', '')  
+        .name(Object.keys(pkg.bin)[0])
+        .usage('<command> [options]')
+        .version(pkg.version)
+        .option('-d, --debug', '是否开启调试模式', false)
+        .option('-tp, --targetPath <targetPath>', '是否指定本地调试文件路径', '')
     //命令的注册
     program
-    .command('init [projectName]')
-    .option('-f, --force', '是否强制初始化项目')
-    // .action(init);
-    .action(exec);
-    
+        .command('init [projectName]')
+        .option('-f, --force', '是否强制初始化项目')
+        // .action(init);
+        .action(exec);
+
     //开启debug模式
     program.on('option:debug', () => {
         if (program._optionValues.debug) {
@@ -152,9 +152,9 @@ const registerCommand = () => {
         log.level = process.env.LOG_LEVEL;
         // log.verbose('test');
     });
-    
+
     //指定targetPath
-    program.on('option:targetPath', () => { 
+    program.on('option:targetPath', () => {
         // console.log(program._optionValues.targetPath);
         process.env.CLI_TARGET_PATH = program._optionValues.targetPath;
     });
@@ -169,15 +169,15 @@ const registerCommand = () => {
             console.log(colors.red(`可用命令: none`));
         }
     });
-    
+
     program.parse(process.argv);
-    
+
     if (process.argv && process.argv.length < 1) {
         program.outputHelp();
     }
 }
 
-const prepair = async () => {
+async function prepair() {
     checkPkgVersion();  // 检查当前运行版本
     checkRoot();
     // checkNodeVersion(); // 检查 node 版本
