@@ -33,18 +33,18 @@ class Package {
     // }
 
     // 判断Package是否存在
-    // async exists() {
+    async exists() {
     //     if (this.storeDir) { 
     //         await this.prepare();
     //     } else {
     //         return pathExists(this.targetPath);
     //     }
-    // }
+    }
 
     // 安装Package,有问题没解决
     async install() {
         // await this.prepare();
-        return npminstall({
+         npminstall({
             root: this.targetPath,
             storeDir: this.storeDir,
             registry: getDefaultRegitry(),

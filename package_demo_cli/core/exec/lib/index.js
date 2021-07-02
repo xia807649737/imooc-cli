@@ -5,7 +5,8 @@ const Package = require('@package_demo_cli/package');
 const log = require('@package_demo_cli/log');
 
 const SETTINGS = {
-    init: '@package-demo-cli/init',
+    // init: '@package-demo-cli/init',
+    init: '@imooc-cli/init',
 }
 const CACHE_DIR = 'dependencies';
 
@@ -35,11 +36,12 @@ async function exec() {
             packageName,
             packageVersion
         });
-        // if (pkg.exists()) {
+        if (pkg.exists()) {
             // 更新package
-        // } else {
+            pkg.install();
+        } else {
             // 安装package
-        // }
+        }
     } else {
         pkg = new Package({
             targetPath,
