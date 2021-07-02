@@ -15,50 +15,46 @@ async function exec() {
     // log.verbose('targetPath', targetPath);
     // log.verbose('homePath', homePath);
     let storeDir = '';
-    // let pkg;
+    let pkg;
     // log.verbose('arguments',arguments);
     const cmdObj = arguments[arguments.length - 1];
     const cmdName = cmdObj.name();
     const packageName = SETTINGS[cmdName];
     const packageVersion = 'latest';
-    // const pkg = new Package({
-    //     targetPath,
-    //     packageName,
-    //     packageVersion
-    // });
 
     if (!targetPath) {
-    // 生成缓存存路径
-    targetPath = path.resolve(homePath, CACHE_DIR);
-    storeDir = path.resolve(targetPath, 'node_modules');
-    log.verbose('targetPath', targetPath);
-    log.verbose('storeDir', storeDir);
-    // pkg = new Package({ storeDir });
-    // if (await pkg.exists()) {
-    //}  else {
-    //    await pkg.install();
-    // }
-    } 
-    // else {
-    //     pkg = new Package({
-    //         targetPath,
-    //         packageName,
-    //         packageVersion
-    //     });
-    // }
-    const pkg = new Package({
+        // 生成缓存存路径
+        targetPath = path.resolve(homePath, CACHE_DIR);
+        storeDir = path.resolve(targetPath, 'node_modules');
+        log.verbose('targetPath', targetPath);
+        log.verbose('storeDir', storeDir);
+
+        pkg = new Package({
             targetPath,
             storeDir,
             packageName,
             packageVersion
         });
-    log.verbose('rootFilePath', pkg.getRootFilePath());
+        // if (pkg.exists()) {
+            // 更新package
+        // } else {
+            // 安装package
+        // }
+    } else {
+        pkg = new Package({
+            targetPath,
+            packageName,
+            packageVersion
+        });
+    }
+    // log.verbose('rootFilePath', pkg.getRootFilePath());
+    const rootFile = pkg.getRootFilePath();
+    if (rootFile) {
+        require(rootFile).apply(null, arguments);
+    }
+
     // log.verbose('exists', await pkg.exists());
 
-    // const rootFile = pkg.getRootFilePath();
-    // if (rootFile) { 
-    //     require(rootFile).apply(null, arguments); 
-    // }
 }
 
 module.exports = exec;

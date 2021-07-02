@@ -29,10 +29,9 @@ class Package {
     // async prepare() { 
     //     if (this.packageVersion === 'latest') { 
     //         this.packageVersion = await getNpmLatestVersion(this.packageName);
-    //     } else {
-    //         this.packageVersion = '1.0.5';
     //     }
     // }
+
     // 判断Package是否存在
     // async exists() {
     //     if (this.storeDir) { 
