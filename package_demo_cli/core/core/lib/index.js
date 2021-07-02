@@ -31,7 +31,7 @@ async function core() {
     } catch (e) {
         log.error(e.message);
         if (program.debug) {
-            log.error(e);
+            console.log(e);
         }
     }
 }
