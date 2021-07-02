@@ -4,6 +4,7 @@ const pkgDir = require('pkg-dir').sync;
 // const pathExists = require('path-exists');
 // const npminstall = require('npminstall');
 const formatPath = require('@package_demo_cli/format-path');
+const log = require('@package_demo_cli/log');
 const { isObject } = require('@package_demo_cli/utils');
 // const { getDefaultRegitry, getNpmLatestVersion } = require('@package_demo_cli/get-npm-info');
 
@@ -18,7 +19,7 @@ class Package {
         // package的目标路径
         this.targetPath = options.targetPath;
         // 缓存package的路径
-        this.storeDir = options.storeDir;
+        // this.storeDir = options.storeDir;
         // package的name
         this.packageName = options.packageName;
         // package的version
@@ -64,7 +65,7 @@ class Package {
     getRootFilePath() {
         //1. 获取package.json所在的目录
         const dir = pkgDir(this.targetPath);
-        // console.log(dir);
+        log.verbose('dir',dir);
         if (dir) {
             //2. 读取package.json - require()
             const pkgFile = require(path.resolve(dir, 'package.json'));

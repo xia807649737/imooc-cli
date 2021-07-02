@@ -16,18 +16,19 @@ async function exec() {
     log.verbose('homePath', homePath);
     // let storeDir = '';
 
-    // console.log(arguments);
+    // log.verbose('arguments',arguments);
     const cmdObj = arguments[arguments.length - 1];
     const cmdName = cmdObj.name();
-    // const packageName = SETTINGS[cmdName];
-    // const packageVersion = 'latest';
+    const packageName = SETTINGS[cmdName];
+    const packageVersion = 'latest';
     const pkg = new Package({
         targetPath,
-        // packageName,
-        // packageVersion
+        packageName,
+        packageVersion
     });
-    // console.log(pkg)
-    // if (!targetPath) {
+    log.verbose('rootFilePath', pkg.getRootFilePath());
+
+    if (!targetPath) {
     // 生成缓存存路径
     // targetPath = path.resolve(homePath, CACHE_DIR);
     // storeDir = path.resolve(targetPath, 'node_modules');
@@ -37,7 +38,8 @@ async function exec() {
 
     // if (await pkg.exists()) {
 
-    // } else {
+    } 
+    // else {
     //    await pkg.install();
     // }
     // } else {
@@ -47,7 +49,7 @@ async function exec() {
     //         packageVersion
     //     });
     // }
-    // console.log(await pkg.exists());
+    // log.verbose('exists', await pkg.exists());
 
     // const rootFile = pkg.getRootFilePath();
     // if (rootFile) { 
