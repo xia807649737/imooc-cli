@@ -1,7 +1,7 @@
 'use strict';
 const path = require('path');
 const pkgDir = require('pkg-dir').sync;
-const pathExists = require('path-exists');
+const pathExists = require('path-exists').sync;
 const npminstall = require('npminstall');
 const formatPath = require('@package_demo_cli/format-path');
 const log = require('@package_demo_cli/log');
@@ -26,19 +26,20 @@ class Package {
         this.packageVersion = options.packageVersion;
     }
 
-    // async prepare() { 
-    //     if (this.packageVersion === 'latest') { 
-    //         this.packageVersion = await getNpmLatestVersion(this.packageName);
-    //     }
-    // }
+    async prepare() { 
+        if (this.packageVersion === 'latest') { 
+            this.packageVersion = await getNpmLatestVersion(this.packageName);
+        }
+        log.verbose('packageVersion', this.packageVersion);
+    }
 
     // 判断Package是否存在
     async exists() {
-    //     if (this.storeDir) { 
-    //         await this.prepare();
-    //     } else {
-    //         return pathExists(this.targetPath);
-    //     }
+        if (this.storeDir) { 
+            await this.prepare();
+        } else {
+            return pathExists(this.targetPath);
+        }
     }
 
     // 安装Package,有问题没解决

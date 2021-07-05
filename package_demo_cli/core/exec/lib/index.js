@@ -38,9 +38,9 @@ async function exec() {
         });
         if (pkg.exists()) {
             // 更新package
-            pkg.install();
         } else {
             // 安装package
+            await pkg.install();
         }
     } else {
         pkg = new Package({
@@ -50,12 +50,12 @@ async function exec() {
         });
     }
     // log.verbose('rootFilePath', pkg.getRootFilePath());
+    log.verbose('exists', await pkg.exists());
     const rootFile = pkg.getRootFilePath();
     if (rootFile) {
         require(rootFile).apply(null, arguments);
     }
 
-    // log.verbose('exists', await pkg.exists());
 
 }
 
