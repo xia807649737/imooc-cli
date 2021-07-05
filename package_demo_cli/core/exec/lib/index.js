@@ -38,6 +38,7 @@ async function exec() {
         });
         if (pkg.exists()) {
             // 更新package
+            log.verbose('update', '更新pacakge');
         } else {
             // 安装package
             await pkg.install();

@@ -24,19 +24,27 @@ class Package {
         this.packageName = options.packageName;
         // package的version
         this.packageVersion = options.packageVersion;
+        // package的缓存目录前缀
+        this.cacheFilePathPrefix = this.packageName.replace('/','_');
     }
 
     async prepare() { 
         if (this.packageVersion === 'latest') { 
             this.packageVersion = await getNpmLatestVersion(this.packageName);
         }
-        log.verbose('packageVersion', this.packageVersion);
+        // log.verbose('packageVersion', this.packageVersion);
+        // @imooc-cli/init 1.1.2
+    }
+
+    get cacheFilePath() { 
+        return path.resolve(this.storeDir, `_${this.cacheFilePathPrefix}@${this.packageVersion}@${this.packageName}`);
     }
 
     // 判断Package是否存在
     async exists() {
         if (this.storeDir) { 
             await this.prepare();
+            return pathExists(this.cacheFilePath)
         } else {
             return pathExists(this.targetPath);
         }
