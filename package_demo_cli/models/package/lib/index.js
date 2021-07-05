@@ -1,5 +1,6 @@
 'use strict';
 const path = require('path');
+const fse = require('fs-extra');
 const pkgDir = require('pkg-dir').sync;
 const pathExists = require('path-exists').sync;
 const npminstall = require('npminstall');
@@ -7,6 +8,7 @@ const formatPath = require('@package_demo_cli/format-path');
 const log = require('@package_demo_cli/log');
 const { isObject } = require('@package_demo_cli/utils');
 const { getDefaultRegitry, getNpmLatestVersion } = require('@package_demo_cli/get-npm-info');
+const { Z_ASCII } = require('zlib');
 
 class Package {
     constructor(options) {
@@ -28,14 +30,22 @@ class Package {
         this.cacheFilePathPrefix = this.packageName.replace('/','_');
     }
 
-    async prepare() { 
-        if (this.packageVersion === 'latest') { 
+     // 获取最后一个版本
+    async prepare() {
+        // if (this.storeDir && !pathExists(this.storeDir)) {
+        //     fse.mkdirpSync(this.storeDir);
+        //     log.verbose('fse', fse.mkdirpSync(this.storeDir));
+        // }
+
+        log.verbose('packageVersion1', this.packageVersion);
+        if (this.packageVersion === 'latest') {
             this.packageVersion = await getNpmLatestVersion(this.packageName);
+            // log.verbose('packageVersion2', this.packageVersion);
         }
-        // log.verbose('packageVersion', this.packageVersion);
-        // @imooc-cli/init 1.1.2
+        // @imooc-cli_init@1.0.1@@imooc-cli\init
     }
 
+     // 下载到本地的缓存路径
     get cacheFilePath() { 
         return path.resolve(this.storeDir, `_${this.cacheFilePathPrefix}@${this.packageVersion}@${this.packageName}`);
     }
@@ -44,6 +54,7 @@ class Package {
     async exists() {
         if (this.storeDir) { 
             await this.prepare();
+            log.verbose('cacheFilePath', this.cacheFilePath);
             return pathExists(this.cacheFilePath)
         } else {
             return pathExists(this.targetPath);
@@ -53,7 +64,7 @@ class Package {
     // 安装Package,有问题没解决
     async install() {
         // await this.prepare();
-         npminstall({
+        return npminstall({
             root: this.targetPath,
             storeDir: this.storeDir,
             registry: getDefaultRegitry(),
@@ -65,8 +76,8 @@ class Package {
     }
 
     // 更新Package
-    update() {
-
+    async update() {
+        await this.prepare();
     }
 
     // 获取入口文件路径

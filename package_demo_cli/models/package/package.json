@@ -29,8 +29,9 @@
   "dependencies": {
     "@package_demo_cli/format-path": "file:../../utils/format-path",
     "@package_demo_cli/get-npm-info": "file:../../utils/get-npm-info",
-    "@package_demo_cli/utils": "file:../../utils/utils",
     "@package_demo_cli/log": "file:../../utils/log",
+    "@package_demo_cli/utils": "file:../../utils/utils",
+    "fs-extra": "^10.0.0",
     "npminstall": "^4.11.0",
     "path-exists": "^4.0.0",
     "pkg-dir": "^5.0.0"
