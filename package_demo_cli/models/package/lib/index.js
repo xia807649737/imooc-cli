@@ -32,12 +32,12 @@ class Package {
 
      // 获取最后一个版本
     async prepare() {
-        // if (this.storeDir && !pathExists(this.storeDir)) {
-        //     fse.mkdirpSync(this.storeDir);
-        //     log.verbose('fse', fse.mkdirpSync(this.storeDir));
-        // }
+        if (this.storeDir && !pathExists(this.storeDir)) {
+            fse.mkdirpSync(this.storeDir);
+            log.verbose('fse', fse.mkdirpSync(this.storeDir));
+        }
 
-        log.verbose('packageVersion1', this.packageVersion);
+        // log.verbose('packageVersion1', this.packageVersion);
         if (this.packageVersion === 'latest') {
             this.packageVersion = await getNpmLatestVersion(this.packageName);
             // log.verbose('packageVersion2', this.packageVersion);
@@ -52,13 +52,16 @@ class Package {
 
     // 判断Package是否存在
     async exists() {
-        if (this.storeDir) { 
-            await this.prepare();
-            log.verbose('cacheFilePath', this.cacheFilePath);
-            return pathExists(this.cacheFilePath)
-        } else {
-            return pathExists(this.targetPath);
-        }
+    //     log.verbose('123', pathExists(this.cacheFilePath));
+    //     log.verbose('234', pathExists(this.targetPath));
+
+    //     if (this.storeDir) { 
+    //         await this.prepare();
+         // log.verbose('cacheFilePath', this.cacheFilePath);
+    //         return pathExists(this.cacheFilePath)
+    //     } else {
+    //         return pathExists(this.targetPath);
+    //     }
     }
 
     // 安装Package,有问题没解决
