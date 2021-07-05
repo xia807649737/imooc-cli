@@ -8,7 +8,6 @@ const formatPath = require('@package_demo_cli/format-path');
 const log = require('@package_demo_cli/log');
 const { isObject } = require('@package_demo_cli/utils');
 const { getDefaultRegitry, getNpmLatestVersion } = require('@package_demo_cli/get-npm-info');
-const { Z_ASCII } = require('zlib');
 
 class Package {
     constructor(options) {
