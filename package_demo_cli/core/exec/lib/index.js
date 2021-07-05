@@ -5,7 +5,7 @@ const Package = require('@package_demo_cli/package');
 const log = require('@package_demo_cli/log');
 
 const SETTINGS = {
-    // init: '@package-demo-cli/init',
+    // 只能安置一个已经push到npm的包的地址
     init: '@imooc-cli/init',
 }
 const CACHE_DIR = 'dependencies';
