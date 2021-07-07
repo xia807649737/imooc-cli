@@ -53,12 +53,13 @@ async function exec() {
     }
     // log.verbose('exists', await pkg.exists());
     const rootFile = pkg.getRootFilePath();
-    log.verbose('rootFilePath', rootFile);
+    // log.verbose('rootFilePath', rootFile);
     if (rootFile) {
+        // 当前进程中调用
         require(rootFile).apply(null, arguments);
-    }
-    
+        // 在node子进程中调用,获得更多cpu资源
 
+    }
 }
 
 module.exports = exec;
