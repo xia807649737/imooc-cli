@@ -21,7 +21,7 @@ async function exec() {
     const cmdObj = arguments[arguments.length - 1];
     const cmdName = cmdObj.name();
     const packageName = SETTINGS[cmdName];
-    const packageVersion = '1.0.1';
+    const packageVersion = 'latest';
 
     if (!targetPath) {
         // 生成缓存存路径
@@ -51,9 +51,9 @@ async function exec() {
             packageVersion
         });
     }
-    // log.verbose('rootFilePath', pkg.getRootFilePath());
     // log.verbose('exists', await pkg.exists());
     const rootFile = pkg.getRootFilePath();
+    log.verbose('rootFilePath', rootFile);
     if (rootFile) {
         require(rootFile).apply(null, arguments);
     }
