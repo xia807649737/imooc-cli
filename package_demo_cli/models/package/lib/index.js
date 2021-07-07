@@ -98,6 +98,8 @@ class Package {
                 }],
             })
         }
+        this.packageVersion = latestPackageVersion;
+        // log.verbose('currentPackageVersion', this.packageVersion);
     }
 
     // 获取入口文件路径
