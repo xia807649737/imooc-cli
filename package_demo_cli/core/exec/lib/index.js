@@ -52,7 +52,7 @@ async function exec() {
         });
     }
     // log.verbose('rootFilePath', pkg.getRootFilePath());
-    log.verbose('exists', await pkg.exists());
+    // log.verbose('exists', await pkg.exists());
     const rootFile = pkg.getRootFilePath();
     if (rootFile) {
         require(rootFile).apply(null, arguments);

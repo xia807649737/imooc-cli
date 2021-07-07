@@ -33,13 +33,13 @@ class Package {
     async prepare() {
         if (this.storeDir && !pathExists(this.storeDir)) {
             fse.mkdirpSync(this.storeDir);
-            log.verbose('fse', fse.mkdirpSync(this.storeDir));
+            // log.verbose('fse', fse.mkdirpSync(this.storeDir));
         }
         if (this.packageVersion === 'latest') {
             this.packageVersion = await getNpmLatestVersion(this.packageName);
-            // log.verbose('packageVersion', this.packageVersion);
+            // log.verbose('latest', this.packageVersion);
         }
-        // log.verbose('currentVersion', this.packageVersion);
+        // log.verbose('oldVersion', this.packageVersion);
         // @imooc-cli_init@1.0.1@@imooc-cli\init
     }
 
