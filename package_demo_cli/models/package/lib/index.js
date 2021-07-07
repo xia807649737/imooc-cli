@@ -26,60 +26,78 @@ class Package {
         // package的version
         this.packageVersion = options.packageVersion;
         // package的缓存目录前缀
-        this.cacheFilePathPrefix = this.packageName.replace('/','_');
+        this.cacheFilePathPrefix = this.packageName.replace('/', '_');
     }
 
-     // 获取最后一个版本
+    // 获取最后一个版本
     async prepare() {
         if (this.storeDir && !pathExists(this.storeDir)) {
             fse.mkdirpSync(this.storeDir);
             log.verbose('fse', fse.mkdirpSync(this.storeDir));
         }
-
-        // log.verbose('packageVersion1', this.packageVersion);
         if (this.packageVersion === 'latest') {
             this.packageVersion = await getNpmLatestVersion(this.packageName);
-            // log.verbose('packageVersion2', this.packageVersion);
+            // log.verbose('packageVersion', this.packageVersion);
         }
+        // log.verbose('currentVersion', this.packageVersion);
         // @imooc-cli_init@1.0.1@@imooc-cli\init
     }
 
-     // 下载到本地的缓存路径
-    get cacheFilePath() { 
+    // 下载到本地的缓存路径
+    get cacheFilePath() {
         return path.resolve(this.storeDir, `_${this.cacheFilePathPrefix}@${this.packageVersion}@${this.packageName}`);
     }
 
+    // 根据给定的version去生成指定版本的路径
+    getSpecificCacheFilePath(packageVersion) {
+        return path.resolve(this.storeDir, `_${this.cacheFilePathPrefix}@${packageVersion}@${this.packageName}`);
+    }
     // 判断Package是否存在
     async exists() {
-    //     log.verbose('123', pathExists(this.cacheFilePath));
-    //     log.verbose('234', pathExists(this.targetPath));
-
-    //     if (this.storeDir) { 
-    //         await this.prepare();
-         // log.verbose('cacheFilePath', this.cacheFilePath);
-    //         return pathExists(this.cacheFilePath)
-    //     } else {
-    //         return pathExists(this.targetPath);
-    //     }
+        if (this.storeDir) {
+            await this.prepare();
+            // log.verbose('cacheFilePath', this.cacheFilePath);
+            return pathExists(this.cacheFilePath)
+        } else {
+            return pathExists(this.targetPath);
+        }
     }
 
     // 安装Package,有问题没解决
     async install() {
-        // await this.prepare();
+        await this.prepare();
         return npminstall({
             root: this.targetPath,
             storeDir: this.storeDir,
             registry: getDefaultRegitry(),
             pkgs: [{
-                    name: this.packageName,
-                    version: this.packageVersion
-                }],
+                name: this.packageName,
+                version: this.packageVersion
+            }],
         })
     }
 
     // 更新Package
     async update() {
         await this.prepare();
+        // 1.获取最新的npm模块版本号
+        const latestPackageVersion = await getNpmLatestVersion(this.packageName);
+        log.verbose('latestPackageVersion', latestPackageVersion);
+
+        // 2.查询最新的版本号对应的路径是否存在
+        const latestFilePath = this.getSpecificCacheFilePath(latestPackageVersion);
+        // 3.如果不存在,则直接安装最新版本
+        if (!pathExists(latestFilePath)) {
+            return npminstall({
+                root: this.targetPath,
+                storeDir: this.storeDir,
+                registry: getDefaultRegitry(),
+                pkgs: [{
+                    name: this.packageName,
+                    version: latestPackageVersion
+                }],
+            })
+        }
     }
 
     // 获取入口文件路径

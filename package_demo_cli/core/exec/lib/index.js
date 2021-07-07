@@ -39,7 +39,7 @@ async function exec() {
         if (await pkg.exists()) {
             // 更新package
             // log.verbose('update', '更新pacakge');
-            // await pkg.update();
+            await pkg.update();
         } else {
             // 安装package
             await pkg.install();
@@ -52,7 +52,7 @@ async function exec() {
         });
     }
     // log.verbose('rootFilePath', pkg.getRootFilePath());
-    // log.verbose('exists', await pkg.exists());
+    log.verbose('exists', await pkg.exists());
     const rootFile = pkg.getRootFilePath();
     if (rootFile) {
         require(rootFile).apply(null, arguments);

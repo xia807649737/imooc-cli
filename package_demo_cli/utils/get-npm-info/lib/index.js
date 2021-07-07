@@ -55,4 +55,8 @@ async function getNpmLatestVersion(npmName, registry) {
     return null;
 }
 
-module.exports = { getNmpSemverVersion, getDefaultRegitry, getNpmLatestVersion };
+module.exports = {
+    getNmpSemverVersion,
+    getDefaultRegitry,
+    getNpmLatestVersion
+};
