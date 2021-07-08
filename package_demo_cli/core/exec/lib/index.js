@@ -56,7 +56,8 @@ async function exec() {
     // log.verbose('rootFilePath', rootFile);
     if (rootFile) {
         // 当前进程中调用
-        require(rootFile).apply(null, arguments);
+        // require(rootFile).apply(null, arguments);
+        require(rootFile).call(null, Array.from(arguments));
         // 在node子进程中调用,获得更多cpu资源
 
     }
