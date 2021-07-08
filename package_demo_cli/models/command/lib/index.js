@@ -1,18 +1,23 @@
 'use strict';
 
 const semver = require('semver');
-const LOWEST_NODE_VERSION = '12.0.0';
-
+const LOWEST_NODE_VERSION = '15.0.0';
+const colors = require('colors/safe');
+const log = require('@package_demo_cli/log');
 class Command { 
     constructor(argv) {
         // console.log('Command constructor', argv);
-        thid._argv = argv;
+        this._argv = argv;
         let runner = new Promise((resolve, reject) => {
             let chain = Promise.resolve();
-            chain = chain.then(() => { });
+            chain = chain.then(() => this.checkNodeVersion());
+            chain.catch(err => { 
+            log.error(err.message);
+            })
         })
     }
 
+    // 首先校验node版本
     checkNodeVersion() {
         const currentVersion = process.version;
         const lowestVersion = LOWEST_NODE_VERSION;
