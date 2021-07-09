@@ -8,7 +8,7 @@ const log = require('@package_demo_cli/log');
 
 class Command { 
     constructor(argv) {
-        console.log('Command constructor', argv);
+        // log.verbose('Command constructor', argv);
         if (!argv) { 
             throw new Error('参数不能为空!');
         }
