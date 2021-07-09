@@ -1,16 +1,23 @@
 'use strict';
 
 const semver = require('semver');
-const LOWEST_NODE_VERSION = '15.0.0';
+const LOWEST_NODE_VERSION = '12.0.0';
 const colors = require('colors/safe');
 const log = require('@package_demo_cli/log');
+const { isObject } = require('@package_demo_cli/utils');
+
 class Command { 
     constructor(argv) {
         // console.log('Command constructor', argv);
+        if (!argv) { 
+            throw new Error('参数不能为空!');
+        }
+        if(!isObject)
         this._argv = argv;
         let runner = new Promise((resolve, reject) => {
             let chain = Promise.resolve();
             chain = chain.then(() => this.checkNodeVersion());
+            chain = chain.then(() => this.initArgs());
             chain.catch(err => { 
             log.error(err.message);
             })
@@ -26,6 +33,9 @@ class Command {
         }
     }
 
+    initArgs() { 
+        // this.cmd = 
+    }
     init() { 
         throw new Error('init必须实现')
     }
