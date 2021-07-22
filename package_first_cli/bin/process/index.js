@@ -26,5 +26,6 @@ const path = require('path');
 
 //fork:Node(main) -> Node(child)
 const child = cp.fork(path.resolve(__dirname, 'child.js'));
-child.send('hello child process!');
 console.log('main pid:', process.pid);
+
+child.send('hello child process!');
