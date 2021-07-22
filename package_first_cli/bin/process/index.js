@@ -11,5 +11,5 @@ child.stdout.on('data', function(chunk){
 })
 
 child.stderr.on('data', function (chunk) { 
-    console.log('stderr', chunk.toString())
+    console.log('stderr', chunk.toString());
 })
