@@ -1,3 +1,6 @@
+const cp = require('child_process');
+const path = require('path');
+
 //fork:Node(main) -> Node(child)
 const child = cp.fork(path.resolve(__dirname, 'child.js'));
 console.log('main process');
