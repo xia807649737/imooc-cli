@@ -26,6 +26,8 @@ const path = require('path');
 
 //fork:Node(main) -> Node(child)
 const child = cp.fork(path.resolve(__dirname, 'child.js'));
+console.log('main process');
+
 console.log('main pid:', process.pid);
 
 // 主进程向子进程中发送消息
