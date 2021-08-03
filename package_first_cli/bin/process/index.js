@@ -2,11 +2,11 @@ const cp = require('child_process');
 const path = require('path');
 // console.log(cp);
 
-// cp.exec('dir', function (err, stdout, stderr) {
-//     console.log(err);
-//     console.log(stdout);
-//     console.log(stderr);
-// })
+cp.exec('dir', function (err, stdout, stderr) {
+    console.log(err);
+    console.log(stdout);
+    console.log(stderr);
+})
 
 
 
